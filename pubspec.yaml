@@ -1,0 +1,45 @@
+name: werry
+description: A new Flutter application.
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.1.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  flutter_cupertino_localizations: ^1.0.1
+  cupertino_icons: ^0.1.2
+
+  # State
+  provider: ^3.1.0+1
+  # Data
+  #  json_annotation: ^2.4.0
+  dio: ^3.0.3
+  shared_preferences: ^0.5.4
+  localstorage: ^2.0.0
+  # UI
+  oktoast: ^2.2.0
+  pull_to_refresh: ^1.5.7
+  cached_network_image: ^2.0.0-rc
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: AvenirNext
+      fonts:
+        - asset: assets/fonts/AvenirNext-Regular.otf
+    - family: Helvetica
+      fonts:
+        - asset: assets/fonts/Helvetica-Regular.ttf
+  assets:
+    - assets/icon/
+    - assets/images/
+  module:
+    androidX: true
