@@ -58,8 +58,8 @@ class S implements WidgetsLocalizations {
   String get refreshTwoLevel => "release to enter second floor";
   String get register_complete => "Registration successful";
   String get register_content => "Thank you for taking the time to register for an account with Werry. Now start the experience!";
-  String get register_content1 => "Do you already have an account? So please";
-  String get register_content2 => "okay";
+  String get register_content1 => "Do you already have an account? So please ";
+  String get register_content2 => " okay";
   String get retry => "Retry";
   String get setting => "Setting";
   String get settingFont => "System Font";
@@ -159,7 +159,7 @@ class $vi_VN extends S {
   @override
   String get login_confirm_password => "Xác nhận mật khẩu";
   @override
-  String get register_content2 => "nhé";
+  String get register_content2 => " nhé";
   @override
   String get noAccount => "Không tìm thấy tài khoản?";
   @override

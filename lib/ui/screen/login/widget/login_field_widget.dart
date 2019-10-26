@@ -54,40 +54,31 @@ class _LoginTextFieldState extends State<LoginTextField> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-      child: ValueListenableBuilder(
-        valueListenable: obscureNotifier,
-        builder: (context, value, child) => TextFormField(
-          controller: controller,
-          obscureText: value,
-          validator: (text) {
-            var validator = widget.validator ?? (_) => null;
-            return text.trim().length > 0 ? validator(text) : S.of(context).fieldNotNull;
-          },
-          focusNode: widget.focusNode,
-          textInputAction: widget.textInputAction,
-          onFieldSubmitted: widget.onFieldSubmitted,
-          decoration: InputDecoration(
-            prefixIcon: Icon(widget.icon, color: theme.accentColor, size: 22),
-            hintText: widget.label,
-            hintStyle: TextStylesUtils.styleAvenir14BlackW400,
-            suffixIcon: LoginTextFieldSuffixIcon(
-              controller: controller,
-              obscureText: widget.obscureText,
-              obscureNotifier: obscureNotifier,
-            ),
-            filled: true,
-            fillColor: ColorsUtils.white,
-            border: OutlineInputBorder(
-              borderRadius: const BorderRadius.all(
-                const Radius.circular(DimensUtils.size10),
-              ),
-              borderSide: BorderSide(
-                width: 0,
-                style: BorderStyle.none,
-              ),
-            ),
+    return ValueListenableBuilder(
+      valueListenable: obscureNotifier,
+      builder: (context, value, child) => TextFormField(
+        controller: controller,
+        obscureText: value,
+        validator: (text) {
+          var validator = widget.validator ?? (_) => null;
+          return text.trim().length > 0 ? validator(text) : S.of(context).fieldNotNull;
+        },
+        focusNode: widget.focusNode,
+        textInputAction: widget.textInputAction,
+        onFieldSubmitted: widget.onFieldSubmitted,
+        decoration: InputDecoration(
+          prefixIcon: Icon(widget.icon, color: theme.hintColor, size: DimensUtils.size20),
+          hintText: widget.label,
+          hintStyle: TextStylesUtils.styleAvenir14BlackW400,
+          suffixIcon: LoginTextFieldSuffixIcon(
+            controller: controller,
+            obscureText: widget.obscureText,
+            obscureNotifier: obscureNotifier,
+          ),
+          filled: true,
+          fillColor: ColorsUtils.white,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(DimensUtils.size30),
           ),
         ),
       ),
@@ -107,30 +98,33 @@ class LoginTextFieldSuffixIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: <Widget>[
-        Offstage(
-          offstage: !obscureText,
-          child: InkWell(
-            onTap: () {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: DimensUtils.size8, vertical: DimensUtils.size4),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Offstage(
+            offstage: !obscureText,
+            child: InkWell(
+              onTap: () {
 //              debugPrint('onTap');
-              obscureNotifier.value = !obscureNotifier.value;
-            },
-            child: ValueListenableBuilder(
-              valueListenable: obscureNotifier,
-              builder: (context, value, child) => Icon(
-                CupertinoIcons.eye,
-                size: 30,
-                color: value ? theme.hintColor : theme.accentColor,
+                obscureNotifier.value = !obscureNotifier.value;
+              },
+              child: ValueListenableBuilder(
+                valueListenable: obscureNotifier,
+                builder: (context, value, child) => Icon(
+                  Icons.remove_red_eye,
+                  size: DimensUtils.size20,
+                  color: value ? theme.hintColor : theme.accentColor,
+                ),
               ),
             ),
           ),
-        ),
-        LoginTextFieldClearIcon(controller)
-      ],
+          LoginTextFieldClearIcon(controller)
+        ],
+      ),
     );
   }
 }
@@ -178,7 +172,7 @@ class _LoginTextFieldClearIconState extends State<LoginTextFieldClearIcon> {
               widget.controller.clear();
             });
           },
-          child: Icon(CupertinoIcons.clear, size: 30, color: Theme.of(context).hintColor)),
+          child: Icon(CupertinoIcons.clear, size: DimensUtils.size20, color: Theme.of(context).hintColor)),
     );
   }
 }

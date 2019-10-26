@@ -9,12 +9,14 @@ class FilledRoundButton extends StatefulWidget {
   final Text text;
   final Icon prefIcon;
   final VoidCallback cb;
+  final Widget child;
 
   FilledRoundButton.withGradient({
     @required this.gradientColor,
     this.radius = 30.0,
     this.text,
     this.prefIcon,
+    this.child,
     this.cb,
   }) : this.pureColor = null;
 
@@ -23,6 +25,7 @@ class FilledRoundButton extends StatefulWidget {
     this.radius = 30.0,
     this.text,
     this.prefIcon,
+    this.child,
     this.cb,
   }) : this.gradientColor = null;
 
@@ -33,20 +36,24 @@ class FilledRoundButton extends StatefulWidget {
 class _FilledRoundButtonState extends State<FilledRoundButton> {
   @override
   Widget build(BuildContext context) {
-    Widget childWidgetButton = widget.prefIcon == null
-        ? Center(child: widget.text)
-        : Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              widget.prefIcon,
-              const SizedBox(width: 5.0),
-              Container(
-                child: widget.text,
-              )
-            ],
-          );
-
+    Widget childWidgetButton;
+    if (widget.child == null) {
+      childWidgetButton = widget.prefIcon == null
+          ? Center(child: widget.text)
+          : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                widget.prefIcon,
+                const SizedBox(width: 5.0),
+                Container(
+                  child: widget.text,
+                )
+              ],
+            );
+    } else {
+      childWidgetButton = widget.child;
+    }
     return Container(
       decoration: BoxDecoration(
         color: widget.pureColor,
@@ -55,18 +62,17 @@ class _FilledRoundButtonState extends State<FilledRoundButton> {
           widget.radius,
         ),
         boxShadow: [
-          BoxShadow(color: ColorsUtils.buttonShadow, offset: Offset(0, 2), blurRadius: DimensUtils.size13, spreadRadius: 0)
+          BoxShadow(
+              color: ColorsUtils.buttonShadow, offset: Offset(0, 2), blurRadius: DimensUtils.size13, spreadRadius: 0)
         ],
       ),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          // make splash shape fit round button when tap,
-          // if not specified, splash shape is rectangle instead of round
+          highlightColor: ColorsUtils.paleSalmon,
           borderRadius: BorderRadius.circular(
             widget.radius,
           ),
-          highlightColor: Colors.transparent,
           onTap: widget.cb == null ? () => {} : widget.cb,
           child: childWidgetButton,
         ),

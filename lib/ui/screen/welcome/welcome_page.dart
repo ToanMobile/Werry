@@ -3,7 +3,7 @@ import 'package:werry/common/constant.dart';
 import 'package:werry/config/router_manger.dart';
 import 'package:werry/generated/i18n.dart';
 import 'package:werry/ui/widget/filled_round_button.dart';
-import 'package:werry/ui/widget/login/login_bg_widget.dart';
+import 'package:werry/ui/screen/login/widget/login_bg_widget.dart';
 import 'package:werry/utils/assets_utils.dart';
 import 'package:werry/utils/colors_utils.dart';
 import 'package:werry/utils/dimens_utils.dart';
@@ -18,20 +18,23 @@ class WelcomePage extends StatefulWidget {
 class WelcomeState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        BackgroundLogin(),
-        Container(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              buildIconWerry(),
-              buildContent(context),
-            ],
-          ),
-        )
-      ],
+    return Scaffold(
+      backgroundColor: ColorsUtils.pale,
+      body: Stack(
+        children: <Widget>[
+          BackgroundLogin(),
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                buildIconWerry(),
+                buildContent(context),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 

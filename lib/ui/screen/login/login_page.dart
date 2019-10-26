@@ -1,21 +1,21 @@
-import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:werry/common/constant.dart';
 import 'package:werry/config/router_manger.dart';
-import 'package:werry/config/storage_manager.dart';
 import 'package:werry/generated/i18n.dart';
 import 'package:werry/provider/provider_widget.dart';
+import 'package:werry/ui/screen/login/widget/login_bg_widget.dart';
+import 'package:werry/ui/screen/login/widget/signup_widget.dart';
 import 'package:werry/ui/widget/app_bar.dart';
 import 'package:werry/ui/widget/button_progress_indicator.dart';
-import 'package:werry/ui/widget/login/login_bg_widget.dart';
+import 'package:werry/ui/widget/filled_round_button.dart';
+import 'package:werry/utils/colors_utils.dart';
+import 'package:werry/utils/dimens_utils.dart';
+import 'package:werry/utils/sizebox_utils.dart';
 import 'package:werry/utils/text_styles_utils.dart';
 import 'package:werry/viewmodel/login_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../widget/login/login_field_widget.dart';
+import 'widget/login_field_widget.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -37,6 +37,8 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: ColorsUtils.pale,
       appBar: AppBarIcon.back().build(context),
       body: Stack(
         children: <Widget>[
@@ -47,30 +49,41 @@ class _LoginPageState extends State<LoginPage> {
               _nameController.text = model.getLoginName();
             },
             builder: (context, model, child) {
-              return Container(
+              return SingleChildScrollView(
+                scrollDirection: Axis.vertical,
+                padding: EdgeInsets.all(DimensUtils.size40),
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: <Widget>[
+                      buildTextTitleLogin(),
+                      SizeBoxUtils.hGap10,
+                      SingUpWidget(_nameController),
+                      SizeBoxUtils.hGap40,
+                      buildTextUserName(),
+                      SizeBoxUtils.hGap10,
                       LoginTextField(
                         label: S.of(context).login_username,
-                        icon: Icons.perm_identity,
+                        icon: Icons.person,
                         controller: _nameController,
                         textInputAction: TextInputAction.next,
                         onFieldSubmitted: (text) {
                           FocusScope.of(context).requestFocus(_pwdFocus);
                         },
                       ),
+                      SizeBoxUtils.hGap30,
+                      buildTextPassword(),
+                      SizeBoxUtils.hGap10,
                       LoginTextField(
                         controller: _passwordController,
                         label: S.of(context).login_password,
-                        icon: Icons.lock_outline,
+                        icon: Icons.vpn_key,
                         obscureText: true,
                         focusNode: _pwdFocus,
                         textInputAction: TextInputAction.done,
                       ),
-                      LoginButton(_nameController, _passwordController),
-                      SingUpWidget(_nameController),
+                      SizeBoxUtils.hGap30,
+                      LoginButton(_nameController, _passwordController)
                     ]),
               );
             },
@@ -80,12 +93,12 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget buildTextTitleLogin() => Text(S.of(context).appName, style: TextStylesUtils.styleAvenir20CoalGreyW600);
+  Widget buildTextTitleLogin() => Text(S.of(context).signIn, style: TextStylesUtils.styleAvenir20CoalGreyW600);
 
-  Widget buildTextContentRegister() => Text(S.of(context).appName, style: TextStylesUtils.styleAvenir14WhiteW600);
+  Widget buildTextUserName() => Text(S.of(context).login_username, style: TextStylesUtils.styleAvenir12BrownGreyW400);
 
+  Widget buildTextPassword() => Text(S.of(context).login_password, style: TextStylesUtils.styleAvenir12BrownGreyW400);
 }
-
 
 class LoginButton extends StatelessWidget {
   final nameController;
@@ -93,102 +106,46 @@ class LoginButton extends StatelessWidget {
 
   LoginButton(this.nameController, this.passwordController);
 
-  _incrementCounter() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    int counter = (prefs.getInt('counter') ?? 0) + 1;
-    print('Pressed $counter times.');
-    await prefs.setInt('counter', counter);
-    print(prefs.getInt('counter'));
-  }
-
   @override
   Widget build(BuildContext context) {
     var model = Provider.of<LoginModel>(context);
-    return LoginButtonWidget(
-      child: model.busy
-          ? ButtonProgressIndicator()
-          : Text(
-              S.of(context).signIn,
-              style: Theme.of(context).accentTextTheme.title.copyWith(wordSpacing: 6),
+    Widget child = model.busy
+        ? Container(
+            height: DimensUtils.size50,
+            child: Center(child: ButtonProgressIndicator(),),
+          )
+        : Container(
+            height: DimensUtils.size50,
+            child: Center(
+              child: Text(
+                S.of(context).signIn,
+                style: TextStylesUtils.styleAvenir14WhiteW600,
+              ),
             ),
-      onPressed:()=> _incrementCounter(),
-      /*onPressed: model.busy
-          ? null
-          : () {
-              var formState = Form.of(context);
-              if (formState.validate()) {
-                model.login(nameController.text, passwordController.text).then((value) {
-                  if (value) {
-                    Navigator.of(context).pop(true);
-                  } else {
-                    model.showErrorMessage(context);
-                  }
-                });
-              }
-            },*/
+          );
+    return FilledRoundButton.withGradient(
+      radius: DimensUtils.size10,
+      gradientColor: Constant.gradient_WaterMelon_Melon,
+      child: child,
+      cb: () {
+        //Navigator.pushNamed(context, RouteName.register);
+      },
     );
   }
-}
 
-class LoginButtonWidget extends StatelessWidget {
-  final Widget child;
-  final VoidCallback onPressed;
+/* Future<bool>  click () async{
+    model.busy
+    ? null
+        : () {
+    var formState = Form.of(context);
+    if (formState.validate()) {
+    model.login(nameController.text, passwordController.text).then((value) {
+    if (value) {
+    Navigator.of(context).pop(true);
+    } else {
+    model.showErrorMessage(context);
+    }
+    });
+    }};};*/
 
-  LoginButtonWidget({this.child, this.onPressed});
-
-  @override
-  Widget build(BuildContext context) {
-    var color = Theme.of(context).primaryColor.withAlpha(180);
-    return Padding(
-        padding: const EdgeInsets.fromLTRB(15, 40, 15, 20),
-        child: CupertinoButton(
-          padding: EdgeInsets.all(0),
-          color: color,
-          disabledColor: color,
-          borderRadius: BorderRadius.circular(110),
-          pressedOpacity: 0.5,
-          child: child,
-          onPressed: onPressed,
-        ));
-  }
-}
-
-class SingUpWidget extends StatefulWidget {
-  final nameController;
-
-  SingUpWidget(this.nameController);
-
-  @override
-  _SingUpWidgetState createState() => _SingUpWidgetState();
-}
-
-class _SingUpWidgetState extends State<SingUpWidget> {
-  TapGestureRecognizer _recognizerRegister;
-
-  @override
-  void initState() {
-    _recognizerRegister = TapGestureRecognizer()
-      ..onTap = () async {
-        widget.nameController.text = await Navigator.of(context).pushNamed(RouteName.register);
-      };
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _recognizerRegister.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text.rich(TextSpan(text: S.of(context).noAccount, children: [
-        TextSpan(
-            text: S.of(context).signIn,
-            recognizer: _recognizerRegister,
-            style: TextStyle(color: Theme.of(context).accentColor))
-      ])),
-    );
-  }
 }
