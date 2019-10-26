@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:werry/utils/assets_utils.dart';
-import 'package:werry/utils/colors_utils.dart';
 
 class BackgroundLogin extends StatelessWidget {
   @override

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:werry/ui/screen/home/home_page.dart';
 import 'package:werry/ui/screen/login/login_page.dart';
+import 'package:werry/ui/screen/register/register_page.dart';
+import 'package:werry/ui/screen/register/register_success_page.dart';
 import 'package:werry/ui/screen/welcome/welcome_page.dart';
 import 'package:werry/ui/widget/page_route_anim.dart';
 
@@ -9,6 +12,8 @@ class RouteName {
   static const String tab = '/';
   static const String login = 'login';
   static const String register = 'register';
+  static const String register_success = 'register_success';
+  static const String home = 'home';
   static const String setting = 'setting';
 }
 
@@ -20,7 +25,11 @@ class Router {
       case RouteName.login:
         return NoAnimRouteBuilder(LoginPage());
       case RouteName.register:
-        return NoAnimRouteBuilder(WelcomePage());
+        return NoAnimRouteBuilder(RegisterPage());
+      case RouteName.register_success:
+        return NoAnimRouteBuilder(RegisterSuccessPage());
+      case RouteName.home:
+        return NoAnimRouteBuilder(HomePage());
       default:
         return CupertinoPageRoute(
           builder: (_) => Scaffold(

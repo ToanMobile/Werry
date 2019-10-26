@@ -6,7 +6,8 @@ import 'package:werry/config/router_manger.dart';
 import 'package:werry/generated/i18n.dart';
 import 'package:werry/provider/provider_widget.dart';
 import 'package:werry/ui/screen/login/widget/login_bg_widget.dart';
-import 'package:werry/ui/screen/login/widget/signup_widget.dart';
+import 'package:werry/ui/screen/login/widget/login_field_widget.dart';
+import 'package:werry/ui/screen/register/widget/signin_widget.dart';
 import 'package:werry/ui/widget/app_bar.dart';
 import 'package:werry/ui/widget/button_progress_indicator.dart';
 import 'package:werry/ui/widget/filled_round_button.dart';
@@ -15,22 +16,23 @@ import 'package:werry/utils/dimens_utils.dart';
 import 'package:werry/utils/sizebox_utils.dart';
 import 'package:werry/utils/text_styles_utils.dart';
 import 'package:werry/viewmodel/login_model.dart';
-import 'widget/login_field_widget.dart';
 
-class LoginPage extends StatefulWidget {
+class RegisterPage extends StatefulWidget {
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _passwordConfirmController = TextEditingController();
   final _pwdFocus = FocusNode();
 
   @override
   void dispose() {
     _nameController.dispose();
     _passwordController.dispose();
+    _passwordConfirmController.dispose();
     super.dispose();
   }
 
@@ -58,7 +60,7 @@ class _LoginPageState extends State<LoginPage> {
                     children: <Widget>[
                       buildTextTitleLogin(),
                       SizeBoxUtils.hGap10,
-                      SingUpWidget(_nameController),
+                      SingInWidget(_nameController),
                       SizeBoxUtils.hGap40,
                       buildTextUserName(),
                       SizeBoxUtils.hGap10,
@@ -83,6 +85,16 @@ class _LoginPageState extends State<LoginPage> {
                         textInputAction: TextInputAction.done,
                       ),
                       SizeBoxUtils.hGap30,
+                      buildTextConfirmPassword(),
+                      SizeBoxUtils.hGap10,
+                      LoginTextField(
+                        controller: _passwordConfirmController,
+                        label: S.of(context).login_confirm_password,
+                        icon: Icons.vpn_key,
+                        obscureText: true,
+                        focusNode: _pwdFocus,
+                        textInputAction: TextInputAction.done,
+                      ),
                       LoginButton(_nameController, _passwordController)
                     ]),
               );
@@ -93,11 +105,14 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Widget buildTextTitleLogin() => Text(S.of(context).signIn, style: TextStylesUtils.styleAvenir20CoalGreyW600);
+  Widget buildTextTitleLogin() => Text(S.of(context).signUp, style: TextStylesUtils.styleAvenir20CoalGreyW600);
 
   Widget buildTextUserName() => Text(S.of(context).login_username, style: TextStylesUtils.styleAvenir12BrownGreyW400);
 
   Widget buildTextPassword() => Text(S.of(context).login_password, style: TextStylesUtils.styleAvenir12BrownGreyW400);
+
+  Widget buildTextConfirmPassword() =>
+      Text(S.of(context).login_confirm_password, style: TextStylesUtils.styleAvenir12BrownGreyW400);
 }
 
 class LoginButton extends StatelessWidget {
@@ -110,19 +125,23 @@ class LoginButton extends StatelessWidget {
   Widget build(BuildContext context) {
     var model = Provider.of<LoginModel>(context);
     Future<void> click() async {
-      model.busy ? (await null) : ()async {
+      model.busy
+          ? (await null)
+          : () async {
               var formState = Form.of(context);
               if (formState.validate()) {
                 await model.login(nameController.text, passwordController.text).then((value) {
                   if (value) {
-                    Navigator.pushNamed(context, RouteName.register);
+                    Navigator.pushNamed(context, RouteName.home);
                   } else {
                     model.showErrorMessage(context);
                   }
                 });
               }
             };
-    };
+    }
+
+    ;
     Widget child = model.busy
         ? Container(
             height: DimensUtils.size50,
@@ -134,7 +153,7 @@ class LoginButton extends StatelessWidget {
             height: DimensUtils.size50,
             child: Center(
               child: Text(
-                S.of(context).signIn,
+                S.of(context).signUp,
                 style: TextStylesUtils.styleAvenir14WhiteW600,
               ),
             ),
