@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:werry/utils/colors_utils.dart';
 
-class HomePage extends StatefulWidget {
+class ProfilePage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => HomeState();
+  State<StatefulWidget> createState() => ProfileState();
 }
 
-class HomeState extends State<HomePage> {
+class ProfileState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,22 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:werry/utils/colors_utils.dart';
 
-class HomePage extends StatefulWidget {
+class MorePage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => HomeState();
+  State<StatefulWidget> createState() => MoreState();
 }
 
-class HomeState extends State<HomePage> {
+class MoreState extends State<MorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorsUtils.pale,
       body: Stack(
-        children: <Widget>[
-
-        ],
+        children: <Widget>[],
       ),
     );
   }
-
 }

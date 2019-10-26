@@ -132,7 +132,7 @@ class LoginButton extends StatelessWidget {
               if (formState.validate()) {
                 await model.login(nameController.text, passwordController.text).then((value) {
                   if (value) {
-                    Navigator.pushNamed(context, RouteName.home);
+                    Navigator.pushNamed(context, RouteName.tab_home);
                   } else {
                     model.showErrorMessage(context);
                   }

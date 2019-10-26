@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:werry/ui/screen/challenge/challenge_page.dart';
 import 'package:werry/ui/screen/home/home_page.dart';
 import 'package:werry/ui/screen/login/login_page.dart';
+import 'package:werry/ui/screen/more/more_page.dart';
+import 'package:werry/ui/screen/profile/profile_page.dart';
 import 'package:werry/ui/screen/register/register_page.dart';
 import 'package:werry/ui/screen/register/register_success_page.dart';
+import 'package:werry/ui/screen/review/review_page.dart';
 import 'package:werry/ui/screen/welcome/welcome_page.dart';
 import 'package:werry/ui/widget/page_route_anim.dart';
 
@@ -13,8 +17,12 @@ class RouteName {
   static const String login = 'login';
   static const String register = 'register';
   static const String register_success = 'register_success';
-  static const String home = 'home';
   static const String setting = 'setting';
+  static const String tab_home = 'tab_home';
+  static const String tab_review = 'tab_review';
+  static const String tab_challenge = 'tab_challenge';
+  static const String tab_profile = 'tab_profile';
+  static const String tab_more = 'tab_more';
 }
 
 class Router {
@@ -28,8 +36,16 @@ class Router {
         return NoAnimRouteBuilder(RegisterPage());
       case RouteName.register_success:
         return NoAnimRouteBuilder(RegisterSuccessPage());
-      case RouteName.home:
+      case RouteName.tab_home:
         return NoAnimRouteBuilder(HomePage());
+      case RouteName.tab_review:
+        return NoAnimRouteBuilder(ReviewPage());
+      case RouteName.tab_challenge:
+        return NoAnimRouteBuilder(ChallengePage());
+      case RouteName.tab_profile:
+        return NoAnimRouteBuilder(ProfilePage());
+      case RouteName.tab_more:
+        return NoAnimRouteBuilder(MorePage());
       default:
         return CupertinoPageRoute(
           builder: (_) => Scaffold(
