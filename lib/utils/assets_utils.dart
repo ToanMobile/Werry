@@ -9,8 +9,8 @@ class AssetsUtils {
 
   //Icon
   static const String iconWerry = "$imageIcon/icon_werry.png";
-  static const String iconFacebook = "$imageIcon/icon_fb.png";
-  static const String iconGoogle = "$imageIcon/icon_google.png";
+  static const String iconFacebook = "$imageIcon/icon_fb.svg";
+  static const String iconGoogle = "$imageIcon/icon_google.svg";
 
   static const String iconLoginUrban = "$imageIcon/icon_urbanTribe.png";
   static const String iconLoginSuche = "$imageIcon/icon_suche.png";

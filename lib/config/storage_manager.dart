@@ -1,6 +1,6 @@
 import 'package:localstorage/localstorage.dart';
-import 'package:werry/utils/log_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:werry/utils/log_utils.dart';
 
 class StorageManager {
   static SharedPreferences sharedPreferences;

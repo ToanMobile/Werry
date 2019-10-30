@@ -29,14 +29,6 @@ class HeaderInterceptor extends InterceptorsWrapper {
   onRequest(RequestOptions options) async {
     options.connectTimeout = 1000 * 45;
     options.receiveTimeout = 1000 * 45;
-/*
-    var appVersion = await PlatformUtils.getAppVersion();
-    var version = Map()
-      ..addAll({
-        'appVerison': appVersion,
-      });
-    options.headers['version'] = version;
-    options.headers['platform'] = Platform.operatingSystem;*/
     return options;
   }
 }

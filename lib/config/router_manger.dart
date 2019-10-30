@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:werry/ui/screen/challenge/challenge_page.dart';
 import 'package:werry/ui/screen/home/home_page.dart';
+import 'package:werry/ui/screen/home/tab_navigator.dart';
 import 'package:werry/ui/screen/login/login_page.dart';
 import 'package:werry/ui/screen/more/more_page.dart';
 import 'package:werry/ui/screen/profile/profile_page.dart';
@@ -36,6 +37,8 @@ class Router {
         return NoAnimRouteBuilder(RegisterPage());
       case RouteName.register_success:
         return NoAnimRouteBuilder(RegisterSuccessPage());
+      case RouteName.tab:
+        return NoAnimRouteBuilder(TabNavigator());
       case RouteName.tab_home:
         return NoAnimRouteBuilder(HomePage());
       case RouteName.tab_review:

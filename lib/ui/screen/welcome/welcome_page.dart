@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:werry/common/constant.dart';
 import 'package:werry/config/router_manger.dart';
 import 'package:werry/generated/i18n.dart';
@@ -18,6 +19,8 @@ class WelcomePage extends StatefulWidget {
 class WelcomeState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
+    double widthScreen = MediaQuery.of(context).size.width;
+    double heightScreen = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: ColorsUtils.pale,
       body: Stack(
@@ -28,8 +31,9 @@ class WelcomeState extends State<WelcomePage> {
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                buildIconWerry(),
-                buildContent(context),
+                buildIconWerry(widthScreen, heightScreen),
+                buildButtonLogin(context, heightScreen),
+                buildLoginSocial(),
               ],
             ),
           )
@@ -38,40 +42,24 @@ class WelcomeState extends State<WelcomePage> {
     );
   }
 
-  Widget buildIconWerry() => Image.asset(
-        AssetsUtils.iconWerry,
-        width: MediaQuery.of(context).size.width,
-        height: DimensUtils.size350,
+  Widget buildIconWerry(double widthScreen, double heightScreen) => Container(
+        width: widthScreen,
+        padding: EdgeInsets.only(top: heightScreen / 6),
+        child: Image.asset(AssetsUtils.iconWerry),
       );
 
   Widget buildTextTitleWerry() => Text(S.of(context).appName, style: TextStylesUtils.styleAvenir14WhiteW600);
 
-  Widget buildContent(BuildContext context) => Container(
+  Widget buildButtonLogin(BuildContext context, double heightScreen) => Container(
       width: DimensUtils.size300,
+      height: heightScreen / 4,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.end,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           buildContainerSignup(context),
           SizeBoxUtils.hGap30,
           buildContainerRegister(context),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              buildTextLoginSocial(),
-              Padding(
-                padding: EdgeInsets.only(top: DimensUtils.size20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    buildIconFacebook(),
-                    buildIconGoogle(),
-                  ],
-                ),
-              )
-            ],
-          ),
         ],
       ));
 
@@ -107,13 +95,27 @@ class WelcomeState extends State<WelcomePage> {
         ),
       );
 
-  Widget buildTextLoginSocial() => Container(
-        margin: EdgeInsets.only(top: DimensUtils.size20),
-        child: Text(S.of(context).orLoginWith, style: TextStylesUtils.styleAvenir14VeryLightW500),
+  Widget buildLoginSocial() => Container(
+        width: DimensUtils.size300,
+        height: DimensUtils.size100,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Expanded(
+              flex: 1,
+              child: Text(S.of(context).orLoginWith, style: TextStylesUtils.styleAvenir14VeryLightW500),
+            ),
+            Expanded(
+              flex: 0,
+              child: Row(
+                children: <Widget>[
+                  SvgPicture.asset(AssetsUtils.iconFacebook, height: DimensUtils.size70),
+                  SvgPicture.asset(AssetsUtils.iconGoogle, height: DimensUtils.size70),
+                ],
+              ),
+            )
+          ],
+        ),
       );
-
-  Widget buildIconFacebook() => Image.asset(AssetsUtils.iconFacebook);
-
-  Widget buildIconGoogle() => Image.asset(AssetsUtils.iconGoogle);
-
 }

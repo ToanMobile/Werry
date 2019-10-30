@@ -7,7 +7,7 @@ final Http http = Http();
 class Http extends BaseHttp {
   @override
   void init() {
-    options.baseUrl = 'https://www.wanandroid.com/';
+    options.baseUrl = 'http://34.227.133.92/';
     interceptors.add(ApiInterceptor());
   }
 }
@@ -18,13 +18,13 @@ class ApiInterceptor extends InterceptorsWrapper {
   onRequest(RequestOptions options) async {
     debugPrint('---api-request--->url--> ${options.baseUrl}${options.path}' +
         ' queryParameters: ${options.queryParameters}');
-//    debugPrint('---api-request--->data--->${options.data}');
+    debugPrint('---api-request--->data--->${options.data}');
     return options;
   }
 
   @override
   onResponse(Response response) {
-//    debugPrint('---api-response--->resp----->${response.data}');
+    debugPrint('---api-response--->resp----->${response.data}');
     ResponseData respData = ResponseData.fromJson(response.data);
     if (respData.success) {
       response.data = respData.data;
