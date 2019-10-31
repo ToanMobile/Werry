@@ -35,7 +35,7 @@ flutter:
   fonts:
     - family: AvenirNext
       fonts:
-        - asset: assets/fonts/AvenirNext-Regular.otf
+        - asset: assets/fonts/AvenirNext.ttc
     - family: Helvetica
       fonts:
         - asset: assets/fonts/Helvetica-Regular.ttf

@@ -8,6 +8,7 @@ import 'package:werry/ui/screen/login/widget/login_bg_widget.dart';
 import 'package:werry/utils/assets_utils.dart';
 import 'package:werry/utils/colors_utils.dart';
 import 'package:werry/utils/dimens_utils.dart';
+import 'package:werry/utils/screen_utils.dart';
 import 'package:werry/utils/sizebox_utils.dart';
 import 'package:werry/utils/text_styles_utils.dart';
 
@@ -19,6 +20,7 @@ class WelcomePage extends StatefulWidget {
 class WelcomeState extends State<WelcomePage> {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.getInstance().init(context);
     double widthScreen = MediaQuery.of(context).size.width;
     double heightScreen = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -45,7 +47,7 @@ class WelcomeState extends State<WelcomePage> {
   Widget buildIconWerry(double widthScreen, double heightScreen) => Container(
         width: widthScreen,
         padding: EdgeInsets.only(top: heightScreen / 6),
-        child: Image.asset(AssetsUtils.iconWerry),
+        child: SvgPicture.asset(AssetsUtils.iconWerry),
       );
 
   Widget buildTextTitleWerry() => Text(S.of(context).appName, style: TextStylesUtils.styleAvenir14WhiteW600);

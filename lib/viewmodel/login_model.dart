@@ -14,7 +14,8 @@ class LoginModel extends ViewStateModel {
   }
 
   Future<bool> login(loginName, password) async {
-    setBusy();
+    setIdle();
+    //TODO //setBusy();
     try {
      // var user = await WanAndroidRepository.login(loginName, password);
      // userModel.saveUser(user);
