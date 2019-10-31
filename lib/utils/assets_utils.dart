@@ -6,6 +6,8 @@ class AssetsUtils {
   static const String bgLogin = "$imageDir/bg_login.webp";
   static const String bgLoginSusscess = "$imageDir/bg_registered_successfully.webp";
 
+  //Home
+  static const String imageCarousel = "$imageDir/carousel_slider1.webp";
   //Icon
   static const String iconWerry = "$imageIcon/icon_werry.svg";
   static const String iconFacebook = "$imageIcon/icon_fb.svg";

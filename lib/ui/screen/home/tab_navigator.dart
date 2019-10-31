@@ -9,15 +9,10 @@ import 'package:werry/ui/screen/review/review_page.dart';
 import 'package:werry/utils/assets_utils.dart';
 import 'package:werry/utils/colors_utils.dart';
 import 'package:werry/utils/dimens_utils.dart';
+import 'package:werry/utils/text_styles_utils.dart';
 import 'home_page.dart';
 
-List<Widget> pages = <Widget>[
-  HomePage(),
-  ReviewPage(),
-  ChallengePage(),
-  ProfilePage(),
-  MorePage()
-];
+List<Widget> pages = <Widget>[HomePage(), ReviewPage(), ChallengePage(), ProfilePage(), MorePage()];
 
 class TabNavigator extends StatefulWidget {
   TabNavigator({Key key}) : super(key: key);
@@ -36,8 +31,7 @@ class _TabNavigatorState extends State<TabNavigator> {
     return Scaffold(
       body: WillPopScope(
         onWillPop: () async {
-          if (_lastPressed == null ||
-              DateTime.now().difference(_lastPressed) > Duration(seconds: 1)) {
+          if (_lastPressed == null || DateTime.now().difference(_lastPressed) > Duration(seconds: 1)) {
             _lastPressed = DateTime.now();
             return false;
           }
@@ -55,41 +49,71 @@ class _TabNavigatorState extends State<TabNavigator> {
           },
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(AssetsUtils.iconTabHome),
-            activeIcon: SvgPicture.asset(AssetsUtils.iconTabHome, color: ColorsUtils.watermelon,),
-            title: Text(S.of(context).tab_home),
+      bottomNavigationBar: Container(
+        height: DimensUtils.size60,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(topRight: Radius.circular(DimensUtils.size16), topLeft: Radius.circular(DimensUtils.size16)),
+          boxShadow: [
+            BoxShadow(color: ColorsUtils.brownishGrey, spreadRadius: 0, blurRadius: 10),
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(DimensUtils.size16),
+            topRight: Radius.circular(DimensUtils.size16),
           ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(AssetsUtils.iconTabReview),
-            activeIcon: SvgPicture.asset(AssetsUtils.iconTabReview, color: ColorsUtils.watermelon,),
-            title: Text(S.of(context).tab_review),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            items: <BottomNavigationBarItem>[
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(AssetsUtils.iconTabHome),
+                activeIcon: SvgPicture.asset(
+                  AssetsUtils.iconTabHome,
+                  color: ColorsUtils.watermelon,
+                ),
+                title: Text(S.of(context).tab_home),
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(AssetsUtils.iconTabReview),
+                activeIcon: SvgPicture.asset(
+                  AssetsUtils.iconTabReview,
+                  color: ColorsUtils.watermelon,
+                ),
+                title: Text(S.of(context).tab_review),
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(AssetsUtils.iconTabChallenge),
+                activeIcon: SvgPicture.asset(
+                  AssetsUtils.iconTabChallenge,
+                  color: ColorsUtils.watermelon,
+                ),
+                title: Text(S.of(context).tab_challenge),
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(AssetsUtils.iconTabPerson),
+                activeIcon: SvgPicture.asset(
+                  AssetsUtils.iconTabPerson,
+                  color: ColorsUtils.watermelon,
+                ),
+                title: Text(S.of(context).tab_personal),
+              ),
+              BottomNavigationBarItem(
+                icon: SvgPicture.asset(AssetsUtils.iconTabMore),
+                activeIcon: SvgPicture.asset(
+                  AssetsUtils.iconTabMore,
+                  color: ColorsUtils.watermelon,
+                ),
+                title: Text(S.of(context).tab_more),
+              ),
+            ],
+            currentIndex: _selectedIndex,
+            fixedColor: ColorsUtils.watermelon,
+            unselectedFontSize: DimensUtils.size10,
+            onTap: (index) {
+              _pageController.jumpToPage(index);
+            },
           ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(AssetsUtils.iconTabChallenge),
-            activeIcon: SvgPicture.asset(AssetsUtils.iconTabChallenge, color: ColorsUtils.watermelon,),
-            title: Text(S.of(context).tab_challenge),
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(AssetsUtils.iconTabPerson),
-            activeIcon: SvgPicture.asset(AssetsUtils.iconTabPerson, color: ColorsUtils.watermelon,),
-            title: Text(S.of(context).tab_personal),
-          ),
-          BottomNavigationBarItem(
-            icon: SvgPicture.asset(AssetsUtils.iconTabMore),
-            activeIcon: SvgPicture.asset(AssetsUtils.iconTabMore, color: ColorsUtils.watermelon,),
-            title: Text(S.of(context).tab_more),
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        fixedColor: ColorsUtils.watermelon,
-        elevation: DimensUtils.size100,
-        onTap: (index) {
-          _pageController.jumpToPage(index);
-        },
+        ),
       ),
     );
   }

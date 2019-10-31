@@ -8,6 +8,7 @@ class SizeBoxUtils {
   static const Widget hGap10 = const SizedBox(height: DimensUtils.size10);
   static const Widget hGap12 = const SizedBox(height: DimensUtils.size12);
   static const Widget hGap16 = const SizedBox(height: DimensUtils.size16);
+  static const Widget hGap20 = const SizedBox(height: DimensUtils.size20);
   static const Widget hGap30 = const SizedBox(height: DimensUtils.size30);
   static const Widget hGap40 = const SizedBox(height: DimensUtils.size40);
   static const Widget hGap50 = const SizedBox(height: DimensUtils.size50);

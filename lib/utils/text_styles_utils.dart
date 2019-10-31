@@ -100,14 +100,14 @@ class TextStylesUtils {
       fontStyle: FontStyle.normal,
       letterSpacing: 0.2000000000000001);
 
-  static const styleAvenir14VeryLightPinkFourW600 = const TextStyle(
+  static const styleAvenir14VeryLightPinkFourW400 = const TextStyle(
       fontFamily: 'AvenirNext',
       color: ColorsUtils.veryLightPinkFour,
       fontSize: DimensUtils.size14,
       fontWeight: FontWeight.w400,
       fontStyle: FontStyle.normal);
 
-  static const styleAvenir14CoalGreyW600 = const TextStyle(
+  static const styleAvenir14CoalGreyW400 = const TextStyle(
       fontFamily: 'AvenirNext',
       color: ColorsUtils.charcoalGrey,
       fontSize: DimensUtils.size14,
