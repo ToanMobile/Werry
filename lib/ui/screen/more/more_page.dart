@@ -10,9 +10,11 @@ class MoreState extends State<MorePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsUtils.pale,
+      backgroundColor: ColorsUtils.offWhite,
       body: Stack(
-        children: <Widget>[],
+        children: <Widget>[
+          Text('MorePage')
+        ],
       ),
     );
   }

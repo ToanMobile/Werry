@@ -12,4 +12,19 @@ class AssetsUtils {
   static const String iconGoogle = "$imageIcon/icon_google.svg";
   static const String iconLoginUrban = "$imageIcon/icon_person.svg";
   static const String iconLoginApproval = "$imageIcon/icon_approval.svg";
+
+  //Icon Tab
+  static const String iconTabHome = "$imageIcon/icon_tab_home.svg";
+  static const String iconTabReview = "$imageIcon/icon_tab_review.svg";
+  static const String iconTabChallenge = "$imageIcon/icon_tab_challenge.svg";
+  static const String iconTabPerson = "$imageIcon/icon_tab_person.svg";
+  static const String iconTabMore = "$imageIcon/icon_tab_more.svg";
+
+  //Icon Home
+  static const String iconHomeMarket = "$imageIcon/icon_home_market.svg";
+  static const String iconHomeFashion = "$imageIcon/icon_home_fashion.svg";
+  static const String iconHomeHotel = "$imageIcon/icon_home_hotel.svg";
+  static const String iconHomeTickets = "$imageIcon/icon_home_tickets.svg";
+  static const String iconHomeTechnology = "$imageIcon/icon_home_technology.svg";
+  static const String iconHomeBeautify = "$imageIcon/icon_home_beautify.svg";
 }

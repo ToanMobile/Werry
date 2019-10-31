@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:werry/generated/i18n.dart';
 import 'package:werry/ui/screen/challenge/challenge_page.dart';
 import 'package:werry/ui/screen/more/more_page.dart';
 import 'package:werry/ui/screen/profile/profile_page.dart';
 import 'package:werry/ui/screen/review/review_page.dart';
 import 'package:werry/utils/assets_utils.dart';
+import 'package:werry/utils/colors_utils.dart';
+import 'package:werry/utils/dimens_utils.dart';
 import 'home_page.dart';
 
 List<Widget> pages = <Widget>[
@@ -44,7 +47,7 @@ class _TabNavigatorState extends State<TabNavigator> {
           itemBuilder: (ctx, index) => pages[index],
           itemCount: pages.length,
           controller: _pageController,
-          physics: NeverScrollableScrollPhysics(),
+          physics: BouncingScrollPhysics(),
           onPageChanged: (index) {
             setState(() {
               _selectedIndex = index;
@@ -56,27 +59,34 @@ class _TabNavigatorState extends State<TabNavigator> {
         type: BottomNavigationBarType.fixed,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Image.asset(AssetsUtils.imageIcon),
+            icon: SvgPicture.asset(AssetsUtils.iconTabHome),
+            activeIcon: SvgPicture.asset(AssetsUtils.iconTabHome, color: ColorsUtils.watermelon,),
             title: Text(S.of(context).tab_home),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.format_list_bulleted),
+            icon: SvgPicture.asset(AssetsUtils.iconTabReview),
+            activeIcon: SvgPicture.asset(AssetsUtils.iconTabReview, color: ColorsUtils.watermelon,),
             title: Text(S.of(context).tab_review),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.group_work),
+            icon: SvgPicture.asset(AssetsUtils.iconTabChallenge),
+            activeIcon: SvgPicture.asset(AssetsUtils.iconTabChallenge, color: ColorsUtils.watermelon,),
             title: Text(S.of(context).tab_challenge),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.call_split),
+            icon: SvgPicture.asset(AssetsUtils.iconTabPerson),
+            activeIcon: SvgPicture.asset(AssetsUtils.iconTabPerson, color: ColorsUtils.watermelon,),
             title: Text(S.of(context).tab_personal),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.insert_emoticon),
+            icon: SvgPicture.asset(AssetsUtils.iconTabMore),
+            activeIcon: SvgPicture.asset(AssetsUtils.iconTabMore, color: ColorsUtils.watermelon,),
             title: Text(S.of(context).tab_more),
           ),
         ],
         currentIndex: _selectedIndex,
+        fixedColor: ColorsUtils.watermelon,
+        elevation: DimensUtils.size100,
         onTap: (index) {
           _pageController.jumpToPage(index);
         },

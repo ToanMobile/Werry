@@ -10,10 +10,10 @@ class HomeState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsUtils.pale,
+      backgroundColor: ColorsUtils.offWhite,
       body: Stack(
         children: <Widget>[
-
+            Text('HomePage')
         ],
       ),
     );

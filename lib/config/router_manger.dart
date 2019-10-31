@@ -14,7 +14,7 @@ import 'package:werry/ui/widget/page_route_anim.dart';
 
 class RouteName {
   static const String welcome = 'welcome';
-  static const String tab = '/';
+  static const String home = '/';
   static const String login = 'login';
   static const String register = 'register';
   static const String register_success = 'register_success';
@@ -37,7 +37,7 @@ class Router {
         return NoAnimRouteBuilder(RegisterPage());
       case RouteName.register_success:
         return NoAnimRouteBuilder(RegisterSuccessPage());
-      case RouteName.tab:
+      case RouteName.home:
         return NoAnimRouteBuilder(TabNavigator());
       case RouteName.tab_home:
         return NoAnimRouteBuilder(HomePage());
