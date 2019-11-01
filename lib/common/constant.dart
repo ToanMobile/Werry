@@ -21,5 +21,5 @@ class Constant {
   static const List<String> orderRightButtonText = ["接单", "开始配送", "完成", "", ""];
 
   static const gradient_WaterMelon_Melon = LinearGradient(colors: [ColorsUtils.watermelon, ColorsUtils.melon]);
-  static const List<Color> colorListMelonWaterMelon = [ColorsUtils.melon, ColorsUtils.watermelon];
+  static const List<Color> colorListMelonWaterMelon = [ColorsUtils.watermelon, ColorsUtils.melon];
 }

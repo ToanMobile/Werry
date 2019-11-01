@@ -1,6 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:werry/utils/text_styles_utils.dart';
+import 'package:werry/common/constant.dart';
+import 'package:werry/generated/i18n.dart';
+import 'package:werry/utils/colors_utils.dart';
+import 'package:werry/utils/dimens_utils.dart';
 
 typedef ValidateFunc = bool Function(String);
 typedef GetTextCb = void Function(String);
@@ -44,35 +47,35 @@ class _TextInputSearchState extends State<TextInputSearch> {
 
   Widget _buildTextField() {
     return Container(
-      height: 50,
-      child: TextFormField(
-          decoration: InputDecoration(
-            border: new OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30),
-              borderSide: BorderSide(
-                width: 0,
-                style: BorderStyle.none,
-              ),
-            ),
-            hasFloatingPlaceholder: false,
-            labelText: 'Search',
-            labelStyle: TextStylesUtils.styleAvenir14VeryLightPinkFourW400,
-            fillColor: Colors.transparent ,
-            filled: true,
-            focusColor: Colors.white,
-            hoverColor: Colors.white,
-            prefixIcon: Padding(
-              padding: EdgeInsets.all(0.0),
-              child: Icon(
-                Icons.search,
-                color: Colors.white,
-              ),
-            ),),
-          controller: widget.controller,
-          focusNode: null,
-          style: null,
-          cursorColor: null,
-          autofocus: false
+      margin: EdgeInsets.symmetric(horizontal: DimensUtils.size16),
+      height: DimensUtils.size55,
+      child: CupertinoTextField(
+        controller: widget.controller,
+        padding: EdgeInsets.symmetric(horizontal: DimensUtils.size16, vertical: DimensUtils.size16),
+        clearButtonMode: OverlayVisibilityMode.editing,
+        placeholder: S.of(context).home_keyword,
+        suffix: Container(
+          margin: EdgeInsets.symmetric(horizontal: DimensUtils.size8, vertical: DimensUtils.size8),
+          width: DimensUtils.size40,
+          height: DimensUtils.size40,
+          child: FlatButton(
+            padding: EdgeInsets.all(0),
+            child: Icon(Icons.search, color: Colors.white),
+            onPressed: () {
+              print('');
+            },
+          ),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(9),
+            gradient: Constant.gradient_WaterMelon_Melon,
+            boxShadow: [BoxShadow(color: Color(0x42ff8258), offset: Offset(0, 7), blurRadius: 14, spreadRadius: 0)],
+          ),
+        ),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(DimensUtils.size10),
+          boxShadow: [BoxShadow(color: ColorsUtils.buttonShadow, offset: Offset(0, 11), blurRadius: DimensUtils.size14, spreadRadius: 0)],
+        ),
       ),
     );
   }

@@ -14,6 +14,7 @@ class DimensUtils {
   static const double size30 = 30;
   static const double size40 = 40;
   static const double size50 = 50;
+  static const double size55 = 55;
   static const double size60 = 60;
   static const double size70 = 70;
   static const double size80 = 80;

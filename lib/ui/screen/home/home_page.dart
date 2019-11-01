@@ -32,6 +32,7 @@ class HomeState extends State<HomePage> {
             buildTextSearch(),
             SizeBoxUtils.hGap20,
             buildSearchView(),
+            buildListSuggest(),
             SizeBoxUtils.hGap20,
             buildCarouselSlider(),
             SizeBoxUtils.hGap20,
@@ -65,6 +66,29 @@ class HomeState extends State<HomePage> {
         validateErrMsg: "",
       );
 
+  Widget buildListSuggest() {
+    final titles = ['iPhone XR', 'Samsung Galaxy Note 10', 'Oppo','iPhone XR', 'Samsung Galaxy Note 10', 'Oppo'];
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: DimensUtils.size16),
+      height: DimensUtils.size30,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: titles.length,
+        itemBuilder: (context, index) {
+          return Container(
+            margin: EdgeInsets.symmetric(horizontal: DimensUtils.size4),
+            padding: const EdgeInsets.all(DimensUtils.size8),
+            child: Text(titles[index], textAlign: TextAlign.center, style: TextStylesUtils.styleAvenir12CoralW400,),
+            decoration: BoxDecoration(
+              border: Border.all(width: 0.5, color: ColorsUtils.coral),
+              borderRadius: BorderRadius.all(Radius.circular(5.0)),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   Widget buildCarouselSlider() => CarouselSlider(
         height: DimensUtils.size180,
         viewportFraction: 1.0,
@@ -87,6 +111,7 @@ class HomeState extends State<HomePage> {
             buildSubMenuRow(View.TOP),
             SizeBoxUtils.hGap30,
             buildSubMenuRow(View.BOTTOM),
+            SizeBoxUtils.hGap30,
           ],
         ),
       );
