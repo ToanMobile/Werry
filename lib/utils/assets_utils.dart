@@ -6,8 +6,6 @@ class AssetsUtils {
   static const String bgLogin = "$imageDir/bg_login.webp";
   static const String bgLoginSusscess = "$imageDir/bg_registered_successfully.webp";
 
-  //Home
-  static const String imageCarousel = "$imageDir/carousel_slider1.webp";
   //Icon
   static const String iconWerry = "$imageIcon/icon_werry.svg";
   static const String iconFacebook = "$imageIcon/icon_fb.svg";
@@ -29,4 +27,14 @@ class AssetsUtils {
   static const String iconHomeTickets = "$imageIcon/icon_home_tickets.svg";
   static const String iconHomeTechnology = "$imageIcon/icon_home_technology.svg";
   static const String iconHomeBeautify = "$imageIcon/icon_home_beautify.svg";
+
+  //Icon Challenge
+  static const String iconChallengeClock = "$imageIcon/icon_clock.svg";
+  static const String iconChallengeRewards = "$imageIcon/icon_rewards.svg";
+
+  //Demo test
+  static const String imageCarousel = "assets/demo/carousel_slider1.webp";
+  static const String imagePercent = "assets/demo/img_percent.webp";
+  static const String imageChallenge1 = "assets/demo/img_challenge1.webp";
+  static const String imageChallenge2 = "assets/demo/img_challenge2.png";
 }

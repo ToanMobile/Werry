@@ -30,7 +30,9 @@ class S implements WidgetsLocalizations {
   String get challenge_content => "Select and complete the challenges below to receive many attractive gifts!";
   String get challenge_list => "Challenge list";
   String get challenge_now => "Currently";
+  String get challenge_rewards_left => "Rewards Left";
   String get challenge_run => "Ongoing challenge (2)";
+  String get challenge_time_left => "Time Left";
   String get close => "Close";
   String get darkMode => "Dark Mode";
   String get feedback => "FeedBack";
@@ -173,6 +175,8 @@ class $vi_VN extends S {
   @override
   String get settingLanguage => "Ngôn ngữ";
   @override
+  String get challenge_time_left => "Thời gian còn lại";
+  @override
   String get tab_more => "Mở rộng";
   @override
   String get viewStateMessageError => "Lấy dữ liệu bị Lỗi";
@@ -190,6 +194,8 @@ class $vi_VN extends S {
   String get retry => "Thử lại";
   @override
   String get home_menu_hotel => "Khách sạn";
+  @override
+  String get challenge_rewards_left => "Khuyến mãi còn lại";
   @override
   String get tab_review => "Đánh giá";
   @override

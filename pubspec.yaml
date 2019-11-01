@@ -43,5 +43,6 @@ flutter:
   assets:
     - assets/icon/
     - assets/images/
+    - assets/demo/
   module:
     androidX: true

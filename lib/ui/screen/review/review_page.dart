@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werry/utils/colors_utils.dart';
+import 'package:werry/utils/text_styles_utils.dart';
 
 class ReviewPage extends StatefulWidget {
   @override
@@ -13,7 +14,9 @@ class ReviewState extends State<ReviewPage> {
       backgroundColor: ColorsUtils.offWhite,
       body: Stack(
         children: <Widget>[
-          Text('ReviewPage')
+          Center(
+            child: Text('ReviewPage', style: TextStylesUtils.styleAvenir20CoalGreyW600,),
+          )
         ],
       ),
     );

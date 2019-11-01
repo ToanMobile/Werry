@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werry/utils/colors_utils.dart';
+import 'package:werry/utils/text_styles_utils.dart';
 
 class MorePage extends StatefulWidget {
   @override
@@ -13,7 +14,9 @@ class MoreState extends State<MorePage> {
       backgroundColor: ColorsUtils.offWhite,
       body: Stack(
         children: <Widget>[
-          Text('MorePage')
+          Center(
+            child: Text('MorePage', style: TextStylesUtils.styleAvenir20CoalGreyW600,),
+          )
         ],
       ),
     );

@@ -32,6 +32,8 @@
   "challenge_before": "Before",
   "challenge_run": "Ongoing challenge (2)",
   "challenge_list": "Challenge list",
+  "challenge_time_left": "Time Left",
+  "challenge_rewards_left": "Rewards Left",
   "fontAvenirNext": "AvenirNext",
 
   "actionConfirm": "Confirm",

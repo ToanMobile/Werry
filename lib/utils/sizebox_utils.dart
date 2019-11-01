@@ -20,6 +20,7 @@ class SizeBoxUtils {
   static const Widget wGap12 = const SizedBox(width: DimensUtils.size12);
   static const Widget wGap16 = const SizedBox(width: DimensUtils.size16);
   static const Widget wGap30 = const SizedBox(width: DimensUtils.size30);
+  static const Widget wGap60 = const SizedBox(width: DimensUtils.size60);
 
   static Widget line = const Divider();
   

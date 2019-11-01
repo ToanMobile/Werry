@@ -32,6 +32,8 @@
   "challenge_before": "Trước đây",
   "challenge_run": "Thử thách đang thực hiện (2)",
   "challenge_list": "Danh sách thử thách",
+  "challenge_time_left": "Thời gian còn lại",
+  "challenge_rewards_left": "Khuyến mãi còn lại",
   "fontAvenirNext": "AvenirNext",
 
   "actionConfirm": "Xác nhận",

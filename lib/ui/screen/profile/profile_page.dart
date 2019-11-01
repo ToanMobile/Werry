@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:werry/utils/colors_utils.dart';
+import 'package:werry/utils/text_styles_utils.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -13,7 +14,9 @@ class ProfileState extends State<ProfilePage> {
       backgroundColor: ColorsUtils.offWhite,
       body: Stack(
         children: <Widget>[
-          Text('ProfilePage')
+          Center(
+            child: Text('ProfilePage', style: TextStylesUtils.styleAvenir20CoalGreyW600,),
+          )
         ],
       ),
     );
