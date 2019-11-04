@@ -1,33 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:werry/config/storage_manager.dart';
-import 'package:werry/data/model/user.dart';
+import 'package:werry/data/model/login_entity.dart';
 
 class UserModel extends ChangeNotifier {
-  static const String kUser = 'kUser';
+  static const String kUser = 'PrefLogin';
 
-  //final GlobalFavouriteStateModel globalFavouriteStateModel;
+  LoginEntity _loginEntity;
 
-  User _user;
+  LoginEntity get login => _loginEntity;
 
-  User get user => _user;
+  bool get hasLogin => login != null;
 
-  bool get hasUser => user != null;
-/*
-  UserModel({@required this.globalFavouriteStateModel}) {
+  UserModel() {
     var userMap = StorageManager.localStorage.getItem(kUser);
-    _user = userMap != null ? User.fromJsonMap(userMap) : null;
+    _loginEntity = userMap != null ? LoginEntity.fromJson(userMap) : null;
   }
 
-  saveUser(User user) {
-    _user = user;
+  saveUser(LoginEntity loginEntity) {
+    _loginEntity = loginEntity;
     notifyListeners();
-    globalFavouriteStateModel.replaceAll(_user.collectIds);
-    StorageManager.localStorage.setItem(kUser, user);
-  }*/
+    StorageManager.localStorage.setItem(kUser, loginEntity);
+  }
 
-  /// 清除持久化的用户数据
   clearUser() {
-    _user = null;
+    _loginEntity = null;
     notifyListeners();
     StorageManager.localStorage.deleteItem(kUser);
   }

@@ -1,21 +1,15 @@
-/*
-
-
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:flustars/flustars.dart';
-import 'package:flutter_deer/common/common.dart';
-import 'package:flutter_deer/util/log_utils.dart';
 import 'package:sprintf/sprintf.dart';
-
+import 'package:werry/utils/log_utils.dart';
 import 'dio_utils.dart';
 import 'error_handle.dart';
 
 class AuthInterceptor extends Interceptor{
   @override
   onRequest(RequestOptions options) {
-    String accessToken = SpUtil.getString(Constant.access_Token);
+    String accessToken = ""; //TODO //SpUtil.getString(Constant.access_Token);
     if (accessToken.isNotEmpty){
       options.headers["Authorization"] = "Bearer $accessToken";
     }
@@ -29,7 +23,7 @@ class TokenInterceptor extends Interceptor{
   Future<String> getToken() async {
 
     Map<String, String> params = Map();
-    params["refresh_token"] = SpUtil.getString(Constant.refresh_Token);
+    params["refresh_token"] = ""; //TODO //SpUtil.getString(Constant.refresh_Token);
     try{
       _tokenDio.options = DioUtils.instance.getDio().options;
       var response = await _tokenDio.post("lgn/refreshToken", data: params);
@@ -37,7 +31,7 @@ class TokenInterceptor extends Interceptor{
         return json.decode(response.data.toString())["access_token"];
       }
     }catch(e){
-      Log.e("刷新Token失败！");
+      Log.e("Token error！");
     }
     return null;
   }
@@ -46,14 +40,13 @@ class TokenInterceptor extends Interceptor{
 
   @override
   onResponse(Response response) async{
-    //401代表token过期
     if (response != null && response.statusCode == ExceptionHandle.unauthorized) {
-      Log.d("-----------自动刷新Token------------");
+      Log.d("-----------Token wrong------------");
       Dio dio = DioUtils.instance.getDio();
       dio.interceptors.requestLock.lock();
       String accessToken = await getToken(); // 获取新的accessToken
       Log.e("-----------NewToken: $accessToken ------------");
-      SpUtil.putString(Constant.access_Token, accessToken);
+      //TODO SpUtil.putString(Constant.access_Token, accessToken);
       dio.interceptors.requestLock.unlock();
 
       if (accessToken != null){{
@@ -61,8 +54,7 @@ class TokenInterceptor extends Interceptor{
         var request = response.request;
         request.headers["Authorization"] = "Bearer $accessToken";
         try {
-          Log.e("----------- 重新请求接口 ------------");
-          /// 避免重复执行拦截器，使用tokenDio
+          Log.e("----------- Token request again ------------");
           var response = await _tokenDio.request(request.path,
               data: request.data,
               queryParameters: request.queryParameters,
@@ -111,7 +103,7 @@ class LoggingInterceptor extends Interceptor{
     }
     // 输出结果
     Log.json(response.data.toString());
-    Log.d("----------End: $duration 毫秒----------");
+    Log.d("----------End: $duration second----------");
     return super.onResponse(response);
   }
   
@@ -128,8 +120,8 @@ class AdapterInterceptor extends Interceptor{
   static const String SLASH = "\"";
   static const String MESSAGE = "message";
 
-  static const String DEFAULT = "\"无返回信息\"";
-  static const String NOT_FOUND = "未找到查询信息";
+  static const String DEFAULT = "\"No Infomation\"";
+  static const String NOT_FOUND = "Not found";
 
   static const String FAILURE_FORMAT = "{\"code\":%d,\"message\":\"%s\"}";
   static const String SUCCESS_FORMAT = "{\"code\":0,\"data\":%s,\"message\":\"\"}";
@@ -180,7 +172,7 @@ class AdapterInterceptor extends Interceptor{
             }else if(map.containsKey(MSG)){
               msg = map[MSG];
             }else {
-              msg = "未知异常";
+              msg = "Not found error";
             }
             result = sprintf(FAILURE_FORMAT, [response.statusCode, msg]);
             // 401 token失效时，单独处理，其他一律为成功
@@ -190,9 +182,8 @@ class AdapterInterceptor extends Interceptor{
               response.statusCode = ExceptionHandle.success;
             }
           } catch (e) {
-            Log.d("异常信息：$e");
-            // 解析异常直接按照返回原数据处理（一般为返回500,503 HTML页面代码）
-            result = sprintf(FAILURE_FORMAT, [response.statusCode, "服务器异常(${response.statusCode})"]);
+            Log.d("Info exection：$e");
+            result = sprintf(FAILURE_FORMAT, [response.statusCode, "Server fail:(${response.statusCode})"]);
           }
         }
       }
@@ -202,4 +193,3 @@ class AdapterInterceptor extends Interceptor{
   }
 }
 
-*/

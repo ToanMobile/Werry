@@ -18,8 +18,10 @@ dependencies:
   # Data
   #  json_annotation: ^2.4.0
   dio: ^3.0.3
+  rxdart: ^0.22.5
   shared_preferences: ^0.5.4
   localstorage: ^2.0.0
+  sprintf: ^4.0.2
   # UI
   oktoast: ^2.2.0
   pull_to_refresh: ^1.5.7
