@@ -1,46 +1,36 @@
 import 'package:werry/config/storage_manager.dart';
+import 'package:werry/data/model/login_entity.dart';
+import 'package:werry/data/repository/repository.dart';
 import 'package:werry/provider/view_state_model.dart';
-import 'user_model.dart';
-
-const String kLoginName = 'kLoginName';
+import 'package:werry/utils/log_utils.dart';
 
 class LoginModel extends ViewStateModel {
-  //final UserModel userModel;
 
-  //LoginModel(this.userModel) : assert(userModel != null);
-
-  String getLoginName() {
-    return StorageManager.sharedPreferences?.getString(kLoginName);
+  LoginEntity getLogin() {
+    return LoginEntity.fromJson(StorageManager.getObject(StorageManager.preLoginUser));
   }
 
   Future<bool> login(loginName, password) async {
-    setIdle();
-    //TODO //setBusy();
+    setBusy();
     try {
-     // var user = await WanAndroidRepository.login(loginName, password);
-     // userModel.saveUser(user);
-      //StorageManager.sharedPreferences.setString(kLoginName, userModel.user.username);
+      var user = await Repository.login(loginName, password);
+      StorageManager.saveObject(StorageManager.preLoginUser, user);
       setIdle();
       return true;
     } catch (e, s) {
-      setError(e,s);
+      setError(e, s);
       return false;
     }
   }
 
   Future<bool> logout() async {
-   /* if (!userModel.hasUser) {
-      //防止递归
-      return false;
-    }*/
     setBusy();
     try {
-      //await WanAndroidRepository.logout();
-     // userModel.clearUser();
+      await Repository.logout();
       setIdle();
       return true;
     } catch (e, s) {
-      setError(e,s);
+      setError(e, s);
       return false;
     }
   }

@@ -36,6 +36,8 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    _nameController.text = 'tranminh1236@gmail.com';
+    _passwordController.text = 'soluuhuong1236';
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: ColorsUtils.pale,
@@ -46,45 +48,42 @@ class _LoginPageState extends State<LoginPage> {
           ProviderWidget<LoginModel>(
             model: LoginModel(),
             onModelReady: (model) {
-              _nameController.text = model.getLoginName();
+              //_nameController.text = model.getLogin().toString();
             },
             builder: (context, model, child) {
               return SingleChildScrollView(
                 scrollDirection: Axis.vertical,
                 padding: EdgeInsets.all(DimensUtils.size40),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      buildTextTitleLogin(),
-                      SizeBoxUtils.hGap10,
-                      SingUpWidget(_nameController),
-                      SizeBoxUtils.hGap40,
-                      buildTextUserName(),
-                      SizeBoxUtils.hGap10,
-                      LoginTextField(
-                        label: S.of(context).login_username,
-                        icon: Icons.person,
-                        controller: _nameController,
-                        textInputAction: TextInputAction.next,
-                        onFieldSubmitted: (text) {
-                          FocusScope.of(context).requestFocus(_pwdFocus);
-                        },
-                      ),
-                      SizeBoxUtils.hGap30,
-                      buildTextPassword(),
-                      SizeBoxUtils.hGap10,
-                      LoginTextField(
-                        controller: _passwordController,
-                        label: S.of(context).login_password,
-                        icon: Icons.vpn_key,
-                        obscureText: true,
-                        focusNode: _pwdFocus,
-                        textInputAction: TextInputAction.done,
-                      ),
-                      SizeBoxUtils.hGap30,
-                      LoginButton(_nameController, _passwordController)
-                    ]),
+                child: Column(mainAxisAlignment: MainAxisAlignment.start, crossAxisAlignment: CrossAxisAlignment.stretch, children: <Widget>[
+                  buildTextTitleLogin(),
+                  SizeBoxUtils.hGap10,
+                  SingUpWidget(_nameController),
+                  SizeBoxUtils.hGap40,
+                  buildTextUserName(),
+                  SizeBoxUtils.hGap10,
+                  LoginTextField(
+                    label: S.of(context).login_username,
+                    icon: Icons.person,
+                    controller: _nameController,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (text) {
+                      FocusScope.of(context).requestFocus(_pwdFocus);
+                    },
+                  ),
+                  SizeBoxUtils.hGap30,
+                  buildTextPassword(),
+                  SizeBoxUtils.hGap10,
+                  LoginTextField(
+                    controller: _passwordController,
+                    label: S.of(context).login_password,
+                    icon: Icons.vpn_key,
+                    obscureText: true,
+                    focusNode: _pwdFocus,
+                    textInputAction: TextInputAction.done,
+                  ),
+                  SizeBoxUtils.hGap30,
+                  LoginButton(_nameController, _passwordController)
+                ]),
               );
             },
           ),
@@ -129,21 +128,17 @@ class LoginButton extends StatelessWidget {
         radius: DimensUtils.size10,
         gradientColor: Constant.gradient_WaterMelon_Melon,
         child: child,
-        cb: () => Navigator.pushNamed(context, RouteName.home));
-    /*model.busy
-          ? ButtonProgressIndicator()
-          : () async {
-              var formState = Form.of(context);
-              if (formState.validate()) {
-                await model.login(nameController.text, passwordController.text).then((value) {
-                  if (value) {
-                    Navigator.pushNamed(context, RouteName.register);
-                  } else {
-                    model.showErrorMessage(context);
-                  }
-                });
+        cb: () {
+          var formState = Form.of(context);
+          if (formState.validate()) {
+            model.login(nameController.text, passwordController.text).then((value) {
+              if (value) {
+                Navigator.pushNamed(context, RouteName.home);
+              } else {
+                model.showErrorMessage(context);
               }
-            },
-    );*/
+            });
+          }
+        });
   }
 }

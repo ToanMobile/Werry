@@ -15,7 +15,7 @@ import 'package:werry/utils/colors_utils.dart';
 import 'package:werry/utils/dimens_utils.dart';
 import 'package:werry/utils/sizebox_utils.dart';
 import 'package:werry/utils/text_styles_utils.dart';
-import 'package:werry/viewmodel/login_model.dart';
+import 'package:werry/viewmodel/register_model.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -25,14 +25,14 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final _nameController = TextEditingController();
   final _passwordController = TextEditingController();
-  final _passwordConfirmController = TextEditingController();
+  final _emailController = TextEditingController();
   final _pwdFocus = FocusNode();
 
   @override
   void dispose() {
     _nameController.dispose();
     _passwordController.dispose();
-    _passwordConfirmController.dispose();
+    _emailController.dispose();
     super.dispose();
   }
 
@@ -45,10 +45,10 @@ class _RegisterPageState extends State<RegisterPage> {
       body: Stack(
         children: <Widget>[
           BackgroundLogin(),
-          ProviderWidget<LoginModel>(
-            model: LoginModel(),
+          ProviderWidget<RegisterModel>(
+            model: RegisterModel(),
             onModelReady: (model) {
-              _nameController.text = model.getLoginName();
+              //_nameController.text = model.getLogin().toString();
             },
             builder: (context, model, child) {
               return SingleChildScrollView(
@@ -74,7 +74,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   buildTextPassword(),
                   SizeBoxUtils.hGap10,
                   LoginTextField(
-                    controller: _passwordController,
+                    controller: _emailController,
                     label: S.of(context).login_password,
                     icon: Icons.vpn_key,
                     obscureText: true,
@@ -85,7 +85,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   buildTextConfirmPassword(),
                   SizeBoxUtils.hGap10,
                   LoginTextField(
-                    controller: _passwordConfirmController,
+                    controller: _passwordController,
                     label: S.of(context).login_confirm_password,
                     icon: Icons.vpn_key,
                     obscureText: true,
@@ -93,7 +93,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     textInputAction: TextInputAction.done,
                   ),
                   SizeBoxUtils.hGap40,
-                  RegisterButton(_nameController, _passwordController)
+                  RegisterButton(_nameController, _emailController, _passwordController)
                 ]),
               );
             },
@@ -115,12 +115,13 @@ class _RegisterPageState extends State<RegisterPage> {
 class RegisterButton extends StatelessWidget {
   final nameController;
   final passwordController;
+  final emailController;
 
-  RegisterButton(this.nameController, this.passwordController);
+  RegisterButton(this.nameController, this.emailController, this.passwordController);
 
   @override
   Widget build(BuildContext context) {
-    var model = Provider.of<LoginModel>(context);
+    var model = Provider.of<RegisterModel>(context);
     Widget child = model.busy
         ? Container(
             height: DimensUtils.size50,
@@ -138,24 +139,21 @@ class RegisterButton extends StatelessWidget {
             ),
           );
     return FilledRoundButton.withGradient(
-        radius: DimensUtils.size10,
-        gradientColor: Constant.gradient_WaterMelon_Melon,
-        child: child,
-        cb: () => Navigator.pushNamed(context, RouteName.register_success));
-        /*model.busy
-          ? ButtonProgressIndicator()
-          : () async {
-              var formState = Form.of(context);
-              if (formState.validate()) {
-                await model.login(nameController.text, passwordController.text).then((value) {
-                  if (value) {
-                    Navigator.pushNamed(context, RouteName.register_success);
-                  } else {
-                    model.showErrorMessage(context);
-                  }
-                });
-              }
-            },
-    );*/
+      radius: DimensUtils.size10,
+      gradientColor: Constant.gradient_WaterMelon_Melon,
+      child: child,
+      cb: () {
+        var formState = Form.of(context);
+        if (formState.validate()) {
+          model.register(nameController.text, emailController.text, passwordController.text).then((value) {
+            if (value) {
+              Navigator.pushNamed(context, RouteName.register_success);
+            } else {
+              model.showErrorMessage(context);
+            }
+          });
+        }
+      },
+    );
   }
 }

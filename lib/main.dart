@@ -44,7 +44,7 @@ class App extends StatelessWidget {
               ],
               supportedLocales: S.delegate.supportedLocales,
               onGenerateRoute: Router.generateRoute,
-              initialRoute: RouteName.home,
+              initialRoute: RouteName.welcome,
             ),
           );
         }),

@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:werry/common/constant.dart';
-import 'package:werry/data/service/http_api.dart';
+import 'package:werry/data/service/http_api_url.dart';
 import 'package:werry/utils/log_utils.dart';
 import 'base_entity.dart';
 import 'error_handle.dart';
@@ -33,7 +33,7 @@ class DioUtils {
       validateStatus: (status) {
         return true;
       },
-      baseUrl: HttpApi.baseUrl,
+      baseUrl: ApiUrl.baseUrl,
 //      contentType: ContentType('application', 'x-www-form-urlencoded', charset: 'utf-8'),
     );
     _dio = Dio(options);

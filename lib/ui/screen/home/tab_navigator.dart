@@ -50,7 +50,7 @@ class _TabNavigatorState extends State<TabNavigator> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: DimensUtils.size60,
+        height: MediaQuery.of(context).size.height * 0.1,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.only(topRight: Radius.circular(DimensUtils.size16), topLeft: Radius.circular(DimensUtils.size16)),
           boxShadow: [
@@ -108,7 +108,7 @@ class _TabNavigatorState extends State<TabNavigator> {
             ],
             currentIndex: _selectedIndex,
             fixedColor: ColorsUtils.watermelon,
-            unselectedFontSize: DimensUtils.size10,
+            unselectedFontSize: DimensUtils.size12,
             onTap: (index) {
               _pageController.jumpToPage(index);
             },

@@ -1,6 +1,7 @@
 import 'package:provider/provider.dart';
 import 'package:werry/viewmodel/locale_model.dart';
 import 'package:werry/viewmodel/theme_model.dart';
+import 'package:werry/viewmodel/user_model.dart';
 
 List<SingleChildCloneableWidget> providers = [
   ...independentServices,
